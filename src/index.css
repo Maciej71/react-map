@@ -2,97 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background-color: bisque;
   height: 100%;
-}
-
-html {
-  height: 100%;
-}
- 
-.App {
-  height: 100%;
-}
-
-#outer-container {
-  height: 100%;
-} 
-
-#page-wrap {
-  height: 100%;
-  overflow: auto;
-}
-
-/* Position and sizing of burger button */
-.bm-burger-button {
-  position: fixed;
-  width: 42px;
-  height: 26px;
-  left: 122px;
-  top: 12px;
-}
-
-*:focus {
-  color: #3397db;
-  border-bottom-style: solid;
-}
-
-/* Burger color*/
-.bm-burger-button span {
-  background-color: #858585;
-}
-
-/* Color/shape of burger icon bars */
-.bm-burger-bars {
-  background: #373a47;
-}
-
-/* Position and sizing of clickable cross button */
-.bm-cross-button {
-  height: 24px;
-  width: 24px;
-}
-
-/* Color/shape of close button cross */
-.bm-cross {
-  background: #f7f7f7;
-}
-
-/* General sidebar styles */
-.bm-menu {
-  background: #858585;
-  padding: 2.5em 1.5em 0;
-  font-size: 1.15em;
-  height: 90%;
-}
-
-/* Morph shape necessary with bubble or elastic */
-.bm-morph-shape {
-  fill: #373a47;
-}
-
-/* Wrapper for item list */
-.bm-item-list {
-  color: #fff;
-  /* padding: 0.8em; */
-}
-
-/* Individual item */
-.bm-item {
-  display: inline-block;
-}
-
-/* Styling of overlay */
-.bm-overlay {
-  background: rgba(0, 0, 0, 0.3);
-}
-
-.tes {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  align-content: space-around;
 }
 
 /* Styling Scrollbar*/
@@ -115,12 +25,25 @@ html {
   background-color: #f8f8f8;
 }
 
-/*Styling Places list*/
-.places-list {
-  list-style-type: none;
-  text-align: center;
+/*General layout*/
+.outer-container {
+  display: grid;
+  height: 100vh;
+  grid-template-rows: 30vh 1fr;
+  background-color: #f7f7f7;
 }
 
-.place {
-  padding: 1vw 0vw 1vw
+@media screen and (min-width: 350px) {
+.outer-container {
+    grid-template-columns: 40% 60%;  
+    
+  }
 }
+
+@media screen and (min-width: 800px) {
+  .outer-container {
+      grid-template-columns: 25% 75%;  
+      
+    }
+  }
+
