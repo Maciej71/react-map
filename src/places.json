@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "name": "Wezze Krafta",
+        "location": { "lat": 50.064730, "lng": 19.927378 },
+        "icon": "Beer"
+    },
+    {
+        "id": 2,
+        "name": "Pod Norenami",
+        "location": { "lat": 50.063394, "lng": 19.931393 },
+        "icon": "Dinner"
+    },
+    {
+        "id": 3,
+        "name": "Wielopole 3",
+        "location": { "lat": 50.058870, "lng": 19.943402 },
+        "icon": "Dinner"
+    },
+    {
+        "id": 4,
+        "name": "Viva la Pinta",
+        "location": { "lat": 50.062616, "lng": 19.939775 },
+        "icon": "Beer"
+    },
+    {
+        "id": 5,
+        "name": "Taste of India",
+        "location": { "lat": 50.052676, "lng": 19.941944 },
+        "icon": "Dinner"
+    }
+]
