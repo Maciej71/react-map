@@ -10,17 +10,18 @@ export default class App extends Component {
   /*global state*/
   state = {
     places: [],
-    data: {}
+    data: {},
+    displayedPlaces: []
   }
-  // componentDidMount() {
-  //   // ContactsAPI.getAll().then((contacts) => {
-  //   //   this.setState({ contacts })
-  //   // })
-  // }
 
   componentDidMount() {
     // fetch('https://api.foursquare.com/v2/venues/5831fe30fb549a1ff58ef339?&client_id=AKV0SHDQ3PR5RZNARHKXH32YTZ1OIFPC1Y3PAY3CTBVKO1V&client_secret=UXY4PPJH0B35AEREN5XE4KACPE5QUN4MM0B5AUMLQX1AABVK&v=20180722')
     //   .then(console.log(response => response.json()));
+    this.setState({displayedPlaces: places})
+  }
+
+  updatePlaces = (placesToUpdate) => {
+    this.setState({ displayedPlaces: placesToUpdate })
   }
 
   render() {
@@ -28,10 +29,13 @@ export default class App extends Component {
       <div className="App">
         <div className="outer-container">
           <div className="list">
-            <List places={places}/>
+            <List 
+              places={places}
+              onUpdate={this.updatePlaces}
+            />
           </div>
           <div className="map">
-             <MapContainer places={places}/>
+             <MapContainer places={ this.state.displayedPlaces}/>
           </div>
         </div>
       </div>
