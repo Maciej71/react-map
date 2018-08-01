@@ -5,13 +5,19 @@ import Beer from "./icons/beer-glass.svg";
 
 export default class PlaceMarker extends Component {
 
+
   render(){
+    let aaaaa = () => {
+      console.log('dasdasdas');
+    }
     return(
         /*global google*/
+        //Define marker settings
         <Marker
           position={this.props.location}
           icon={this.props.icon === "Dinner" ? Dinner: Beer}
           defaultAnimation={google.maps.Animation.DROP}
+          // onClick={}
         >
         </Marker>
     );

@@ -20,6 +20,7 @@ export default class App extends Component {
     this.setState({displayedPlaces: places})
   }
 
+  //Update places which should be marked on the map
   updatePlaces = (placesToUpdate) => {
     this.setState({ displayedPlaces: placesToUpdate })
   }
@@ -29,7 +30,7 @@ export default class App extends Component {
       <div className="App">
         <div className="outer-container">
           <div className="list">
-            <List 
+            <List
               places={places}
               onUpdate={this.updatePlaces}
             />
