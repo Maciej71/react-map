@@ -1,29 +1,28 @@
-import React from "react";
-import { withScriptjs, withGoogleMap, GoogleMap } from "react-google-maps";
-import MapControl from "./MapControl";
+import React from "react"
+import { withScriptjs, withGoogleMap, GoogleMap } from "react-google-maps"
+import MapControl from "./MapControl"
 import PlaceMarker from "./PlaceMarker"
 
 /*global google*/
 const style = require("./style.json")
 
-// handleMarkerClick(marker) {
-//   marker.showInfo = true;
-//   this.setState(this.state);
-// }
-//
-// handleMarkerClose(marker) {
-//   marker.showInfo = false;
-//   this.setState(this.state);
-// }
-
 //Async api call via HOC
 const PlacesMap = withScriptjs(withGoogleMap((props) =>{
-  //create list of markers
-  const markers = props.places.map( place => <PlaceMarker
-    key={place.id}
-    location={place.location}
-    icon={place.icon}
-    />);
+  //create list of markes
+  const markers = props.places.map((place) => {
+    const marker =
+    <PlaceMarker
+      key={place.id}
+      location={place.location}
+      icon={place.icon}
+      id={place.id}
+      selectPlace={ props.selectPlace }
+      deselectPlace={ props.deselectPlace }
+      //check if marker should be selected
+      selected={ props.selected.includes(place.id) }
+    />;
+    return marker
+  });
   return (
     //Create map with markers and controls
       <GoogleMap

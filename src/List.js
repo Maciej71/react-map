@@ -5,11 +5,15 @@ import escapeRegExp from 'escape-string-regexp';
 export default class List extends Component {
 	static propTypes = {
 		places: PropTypes.array.isRequired,
-		onUpdate: PropTypes.func.isRequired
+		selected: PropTypes.array.isRequired,
+		onUpdate: PropTypes.func.isRequired,
+		selectPlace: PropTypes.func.isRequired,
+		deselectPlace: PropTypes.func.isRequired
 	}
 
 	state = {
-    query: ''
+	query: '',
+	// isSelected: false
 	}
 
 	/*
@@ -35,7 +39,17 @@ export default class List extends Component {
 
 	updateQuery = (query) => {
 	  this.setState({ query: query })
-  }
+	}
+
+	selectOrDeselect = (placeId) => {
+		console.log(this.props.selected.includes(placeId) ? 'de': 'se');
+		console.log(placeId)
+		this.props.selected.includes(placeId) ? this.props.deselectPlace(placeId) : this.props.selectPlace(placeId);
+	}
+
+	adjustClass = (bool) => {
+		return !bool
+	}
 
 	render() {
     const { query } = this.state
@@ -59,7 +73,16 @@ export default class List extends Component {
 			  <ul className="places-grid" role="list">
 					{displayPlaces.map((place) => {
 						return(
-							<li className="list-item" key={place.id} tabIndex="1" role="listitem">{place.name}</li>
+							<li 
+							  className="list-item" 
+							  key={place.id} 
+							  tabIndex="1" 
+							  role="listitem"
+							  onClick={() => {
+								this.selectOrDeselect(place.id)
+								this.adjustClass()
+							  }}
+							>{place.name}</li>
 						)
 					})}
 			  </ul>

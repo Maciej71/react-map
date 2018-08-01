@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 // import logo from './logo.svg';
-import './App.css';
-import MapContainer from './MapContainer';
+import './App.css'
+import MapContainer from './MapContainer'
 import List from './List'
 
 const places = require("./places.json")
@@ -11,7 +11,8 @@ export default class App extends Component {
   state = {
     places: [],
     data: {},
-    displayedPlaces: []
+    displayedPlaces: [],
+    selectedFromList: []
   }
 
   componentDidMount() {
@@ -25,18 +26,43 @@ export default class App extends Component {
     this.setState({ displayedPlaces: placesToUpdate })
   }
 
+  selectPlace = (placeId) => {
+    console.log([ ...this.state.selectedFromList, placeId])
+    this.setState(prevState => ({
+      selectedFromList: [ ...prevState.selectedFromList, placeId]
+    }))
+    console.log(this.state.selectedFromList)
+  }
+
+  deselectPlace = (placeId) => {
+    console.log(this.state.selectedFromList.filter(place => !placeId.includes(place)))
+    this.setState((prevState) => {
+      return { selectedFromList: prevState.selectedFromList.filter(place => !placeId.includes(place)) }
+    })
+    console.log(this.state.selectedFromList)
+  }
+
   render() {
+    const { displayedPlaces, selectedFromList } = this.state
     return (
       <div className="App">
         <div className="outer-container">
           <div className="list">
             <List
-              places={places}
-              onUpdate={this.updatePlaces}
+              places={ places }
+              onUpdate={ this.updatePlaces }
+              selectPlace={ this.selectPlace }
+              deselectPlace={ this.deselectPlace }
+              selected={ selectedFromList }
             />
           </div>
           <div className="map">
-             <MapContainer places={ this.state.displayedPlaces}/>
+            <MapContainer 
+              places={ displayedPlaces} 
+              selected = { selectedFromList }
+              selectPlace={ this.selectPlace }
+              deselectPlace={ this.deselectPlace }
+            />
           </div>
         </div>
       </div>
