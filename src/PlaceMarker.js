@@ -11,22 +11,12 @@ export default class PlaceMarker extends Component {
     //reszta propsow
 	}
 
-  // state = {
-  //   isOpen: false
-  // }
-  
-  componentWillReceiveProps() {
-    // this.setState({ isOpen: this.props.selected})
-  }
-
   toggleWindow = () => {
     this.props.selected ? this.props.deselectPlace(this.props.id) : this.props.selectPlace(this.props.id)
   }
 
   render(){
-    // const { isOpen } = this.state
     const { location, icon,  selected} = this.props
-    // console.log(isOpen + ' ' + this.props.selected + ' ' + this.props.id)
     return(
         /*global google*/
         //Define marker settings
