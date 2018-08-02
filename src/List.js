@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import escapeRegExp from 'escape-string-regexp';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import escapeRegExp from 'escape-string-regexp'
+import ListRow from './ListRow'
 
 export default class List extends Component {
 	static propTypes = {
@@ -47,12 +48,9 @@ export default class List extends Component {
 		this.props.selected.includes(placeId) ? this.props.deselectPlace(placeId) : this.props.selectPlace(placeId);
 	}
 
-	adjustClass = (bool) => {
-		return !bool
-	}
-
 	render() {
-    const { query } = this.state
+	const { query } = this.state
+	const { selected } = this.props
 
 		let displayPlaces = this.filterPlaces()
 
@@ -72,17 +70,14 @@ export default class List extends Component {
 				</div>
 			  <ul className="places-grid" role="list">
 					{displayPlaces.map((place) => {
+						let active = selected.includes(place.id) ? true : false
 						return(
-							<li 
-							  className="list-item" 
-							  key={place.id} 
-							  tabIndex="1" 
-							  role="listitem"
-							  onClick={() => {
-								this.selectOrDeselect(place.id)
-								this.adjustClass()
-							  }}
-							>{place.name}</li>
+							<ListRow
+							  key={place.id}
+							  place={ place }
+							  selection= { this.selectOrDeselect }
+							  active= { active }
+							/>
 						)
 					})}
 			  </ul>

@@ -38,6 +38,11 @@ body {
   list-style-type: none;
 }
 
+/*List row styling*/
+.selected-row {
+  background-color: aquamarine;
+}
+
 @media screen and (min-width: 350px) {
 .outer-container {
     grid-template-columns: 40% 60%;

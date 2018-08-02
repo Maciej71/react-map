@@ -16,7 +16,7 @@ export default class PlaceMarker extends Component {
   }
 
   render(){
-    const { location, icon,  selected} = this.props
+    const { location, icon,  selected } = this.props
     return(
         /*global google*/
         //Define marker settings
