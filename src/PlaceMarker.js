@@ -7,8 +7,10 @@ import PropTypes from 'prop-types'
 
 export default class PlaceMarker extends Component {
   static propTypes = {
-    selected: PropTypes.bool.isRequired
-    //reszta propsow
+    selected: PropTypes.bool.isRequired,
+    id: PropTypes.string.isRequired,
+    // selectPlace: PropTypes.function.isRequired,
+    // deselectPlace: PropTypes.function.isRequired
 	}
 
   toggleWindow = () => {
@@ -16,7 +18,7 @@ export default class PlaceMarker extends Component {
   }
 
   render(){
-    const { location, icon,  selected } = this.props
+    const { location, icon,  selected, rating } = this.props
     return(
         /*global google*/
         //Define marker settings
@@ -28,7 +30,7 @@ export default class PlaceMarker extends Component {
         >
         {selected &&
           <InfoWindow onCloseClick={this.toggleWindow}>
-            <h2>{selected ? 'YES' : "NO"}</h2>
+            <h2>RATE: {rating}</h2>
          </InfoWindow>
         }
         </Marker>

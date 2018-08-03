@@ -24,12 +24,11 @@ export default class List extends Component {
 	*/
 	filterPlaces = (query) => {
 		query = (typeof query !== 'undefined') ? query: this.state.query;
-		let displayPlaces
 		if (query) {
 			const match = new RegExp(escapeRegExp(query), 'i')
-			return displayPlaces = this.props.places.filter((place) => match.test(place.name))
+			return this.props.places.filter((place) => match.test(place.name))
 		} else {
-			return displayPlaces = this.props.places
+			return this.props.places
 		}
 	}
 
@@ -43,8 +42,6 @@ export default class List extends Component {
 	}
 
 	selectOrDeselect = (placeId) => {
-		console.log(this.props.selected.includes(placeId) ? 'de': 'se');
-		console.log(placeId)
 		this.props.selected.includes(placeId) ? this.props.deselectPlace(placeId) : this.props.selectPlace(placeId);
 	}
 
@@ -68,7 +65,7 @@ export default class List extends Component {
 						}}
 					/>
 				</div>
-			  <ul className="places-grid" role="list">
+			  <ul className="places-grid">
 					{displayPlaces.map((place) => {
 						let active = selected.includes(place.id) ? true : false
 						return(

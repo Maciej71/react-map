@@ -26,12 +26,10 @@ export default class ListRow extends Component {
     render() {
         const { place, selection } = this.props
         const { active } = this.state
-        console.log(this.props.active + " " + place.name)
         return(
-          <li 
+          <li
             className={active ? "selected-row": null}
-            tabIndex="1" 
-            role="listitem"
+            tabIndex="1"
             onClick={() => {
             selection(place.id)
             this.toggleClass()

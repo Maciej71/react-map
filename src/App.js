@@ -7,10 +7,8 @@ import List from './List'
 const places = require("./places.json")
 
 export default class App extends Component {
-  /*global state*/
   state = {
     places: [],
-    // data: {},
     foursquare: [],
     displayedPlaces: [],
     selectedFromList: []
@@ -27,21 +25,21 @@ export default class App extends Component {
   //handle lack of rating in case of api error
   foursquareInaccessible = (placeId) => {
     this.setState(prevState => ({
-      foursquare: [ ...prevState.foursquare, { placeId : "inaccessible" }]
+      foursquare: [ ...prevState.foursquare, { "rating" : "?", "id" : placeId }]
     }))
   }
 
-
-  foursquareAaccessible = (placeId, response) => {
-    // this.setState(prevState => ({
-    //   foursquare: [ ...prevState.foursquare, { placeId : responseJson.venue.rating }]
-    // }))
-    console.log(response.venue.raiting)
+  //handle data provided from API
+  foursquareAaccessible = (placeId, res) => {
+    this.setState(prevState => ({
+      foursquare: [ ...prevState.foursquare, { "rating" : res.response.venue.rating, "id" : placeId }]
+    }))
   }
 
  //Fetch data async
  fetchAPI = async (placeId, foursquareInaccessible, foursquareAaccessible) => {
-    await fetch('https://api.foursquare.com/v2/venues/'+placeId+'?&client_id=AKV0SHDQ3PR5RZNARHKXH32YTZ1OIFPC1Y3PAY3CTBVKO1V&client_secret=UXY4PPJH0B35AEREN5XE4KACPE5QUN4MM0B5AUMLQX1AABVK&v=20180722', {mode: 'no-cors'})
+    // await fetch('https://api.foursquare.com/v2/venues/'+placeId+'?&client_id=AKV0SHDQ3PR5RZNARHKXH32YTZ1OIFPC1Y3PAY3CTBVKO1V&client_secret=UXY4PPJH0B35AEREN5XE4KACPE5QUN4MM0B5AUMLQX1AABVK&v=20190722')
+    await fetch('htps://api.foursquare.com/v2/venues/'+placeId+'?&oauth_token=aaa&v=20180803')
                           .then(this.handleErrors)
                           .then(response => response.json())
                           .then(response => {
@@ -50,20 +48,17 @@ export default class App extends Component {
                             console.log(error)
                             foursquareInaccessible(placeId)
                           })
-                                             
+
 }
 
   //Fetch data when component is monuted
   async componentDidMount() {
-   await places.map((place) => {
+   await places.forEach((place) => {
       this.fetchAPI(place.id, this.foursquareInaccessible, this.foursquareAaccessible)
     }
   )
   //set initil list of places
   this.setState({displayedPlaces: places})
-
-    // fetch('https://api.foursquare.com/v2/venues/5831fe30fb549a1ff58ef339?&client_id=AKV0SHDQ3PR5RZNARHKXH32YTZ1OIFPC1Y3PAY3CTBVKO1V&client_secret=UXY4PPJH0B35AEREN5XE4KACPE5QUN4MM0B5AUMLQX1AABVK&v=20180722')
-    //   .then(console.log(response => response.json()));
   }
 
   //Update places which should be marked on the map
@@ -71,12 +66,14 @@ export default class App extends Component {
     this.setState({ displayedPlaces: placesToUpdate })
   }
 
+  //Add new place to selected places list
   selectPlace = (placeId) => {
     this.setState(prevState => ({
       selectedFromList: [ ...prevState.selectedFromList, placeId]
     }))
   }
 
+  //Remove a place from selected places list
   deselectPlace = (placeId) => {
     this.setState((prevState) => {
       return { selectedFromList: prevState.selectedFromList.filter(place => !placeId.includes(place)) }
@@ -84,7 +81,7 @@ export default class App extends Component {
   }
 
   render() {
-    const { displayedPlaces, selectedFromList } = this.state
+    const { displayedPlaces, selectedFromList, foursquare } = this.state
     return (
       <div className="App">
         <div className="outer-container">
@@ -98,11 +95,12 @@ export default class App extends Component {
             />
           </div>
           <div className="map">
-            <MapContainer 
-              places={ displayedPlaces} 
+            <MapContainer
+              places={ displayedPlaces}
               selected={ selectedFromList }
               selectPlace={ this.selectPlace }
               deselectPlace={ this.deselectPlace }
+              foursquareVenues={ foursquare }
             />
           </div>
         </div>

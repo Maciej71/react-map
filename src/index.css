@@ -21,9 +21,14 @@ body {
   padding: 4vh 10vh;
 }
 
-.icon-credits, .map-style-credits {
+.icon-credits, .style-api-credits {
   background-color: #f8f8f8;
 }
+
+.style-api-credits {
+  white-space: nowrap;
+}
+
 
 /*General layout*/
 .outer-container {
@@ -43,7 +48,7 @@ body {
   background-color: aquamarine;
 }
 
-@media screen and (min-width: 350px) {
+@media screen and (min-width: 400px) {
 .outer-container {
     grid-template-columns: 40% 60%;
 
