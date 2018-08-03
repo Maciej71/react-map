@@ -27,39 +27,73 @@ export default class App extends Component {
     this.setState(prevState => ({
       foursquare: [ ...prevState.foursquare, { "rating" : "?", "id" : placeId }]
     }))
+    console.log(this.state.foursquare);
   }
 
   //handle data provided from API
   foursquareAaccessible = (placeId, res) => {
+    const rating = res.response.venue.rating
     this.setState(prevState => ({
-      foursquare: [ ...prevState.foursquare, { "rating" : res.response.venue.rating, "id" : placeId }]
+      foursquare: [ ...prevState.foursquare, { "rating" : rating, "id" : placeId }]
     }))
+    // return res.resolved()
+    console.log(this.state.foursquare);
   }
 
  //Fetch data async
- fetchAPI = async (placeId, foursquareInaccessible, foursquareAaccessible) => {
-    // await fetch('https://api.foursquare.com/v2/venues/'+placeId+'?&client_id=AKV0SHDQ3PR5RZNARHKXH32YTZ1OIFPC1Y3PAY3CTBVKO1V&client_secret=UXY4PPJH0B35AEREN5XE4KACPE5QUN4MM0B5AUMLQX1AABVK&v=20190722')
-    await fetch('htps://api.foursquare.com/v2/venues/'+placeId+'?&oauth_token=aaa&v=20180803')
-                          .then(this.handleErrors)
-                          .then(response => response.json())
-                          .then(response => {
-                            foursquareAaccessible(placeId, response)
-                          }).catch((error) => {
-                            console.log(error)
-                            foursquareInaccessible(placeId)
-                          })
+//  fetchAPI = async (placeId, foursquareInaccessible, foursquareAaccessible) => {
+//     // await fetch('https://api.foursquare.com/v2/venues/'+placeId+'?&client_id=AKV0SHDQ3PR5RZNARHKXH32YTZ1OIFPC1Y3PAY3CTBVKO1V&client_secret=UXY4PPJH0B35AEREN5XE4KACPE5QUN4MM0B5AUMLQX1AABVK&v=20190722')
+//     const aaa = await fetch('https://api.foursquare.com/v2/venues/'+placeId+'?&oauth_token=1PN3BU2MQGDW5D0SPA5A5HQRAFZWZ5AJMYSYG3GPEL2DY254&v=20180803')
+//                           .then(this.handleErrors)
+//                           .then(response => response.json())
+//                           .then(response => {
+//                             foursquareAaccessible(placeId, response)
+//                           }).catch((error) => {
+//                             console.log(error)
+//                             foursquareInaccessible(placeId)
+//                           })
+//     return aaa
+//
+// }
 
-}
-
-  //Fetch data when component is monuted
+  //Fetch data for rating
   async componentDidMount() {
-   await places.forEach((place) => {
-      this.fetchAPI(place.id, this.foursquareInaccessible, this.foursquareAaccessible)
-    }
-  )
+    const aaa = places.map((place) => {
+      fetch('https://api.foursquare.com/v2/venues/'+place.id+'?&oauth_token=1PN3BU2MQGDW5D0SPA5A5HQRAFZWZ5AJMYSYG3GPEL2DY254&v=20180803')
+                                .then(this.handleErrors)
+                                .then(response => response.json())
+                                .then(data => {
+                                  return { "rating" : data.response.venue.rating, "id" : place.id }
+                                })
+                                .catch((error) => {
+                                  console.log(error)
+                                  this.setState(prevState => ({
+                                    foursquare: [ ...prevState.foursquare, { "rating" : "?", "id" : place.id }]
+                                  }))
+                                })
+    })
+    console.log(aaa);
+  //   places.forEach(async (place) => {
+  //     // await this.fetchAPI(place.id, this.foursquareInaccessible, this.foursquareAaccessible)
+  //     await fetch('https://api.foursquare.com/v2/venues/'+place.id+'?&oauth_token=1PN3BU2MQGDW5D0SPA5A5HQRAFZWZ5AJMYSYG3GPEL2DY254&v=20180803')
+  //                           .then(this.handleErrors)
+  //                           .then(response => response.json())
+  //                           .then(data => this.setState(prevState => ({
+  //                             foursquare: [ ...prevState.foursquare, { "rating" : "?", "id" : place.id }]
+  //                           })))
+  //                           .catch((error) => {
+  //                             console.log(error)
+  //                             this.setState(prevState => ({
+  //                               foursquare: [ ...prevState.foursquare, { "rating" : "?", "id" : place.id }]
+  //                             }))
+  //                           })
+  //   }
+  // )
   //set initil list of places
   this.setState({displayedPlaces: places})
   }
+
+
 
   //Update places which should be marked on the map
   updatePlaces = (placesToUpdate) => {

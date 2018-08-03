@@ -11,7 +11,9 @@ const PlacesMap = withScriptjs(withGoogleMap((props) =>{
   //create list of markes
   const markers = props.places.map((place) => {
     //get rating
+    console.log(props.foursquare);
     const rating = props.foursquare.filter((rating) => rating.id === place.id)[0].rating
+    console.log(rating + "fdsfdsf");
     const marker =
     <PlaceMarker
       key={place.id}
