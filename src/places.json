@@ -10,5 +10,23 @@
         "name": "Pod Norenami",
         "location": { "lat": 50.063394, "lng": 19.931393 },
         "icon": "Dinner"
+    },
+    {
+        "id": "51c428b5498e5c7be60f7588",
+        "name": "Wielopole 3",
+        "location": { "lat": 50.058870, "lng": 19.943402 },
+        "icon": "Dinner"
+    },
+    {
+        "id": "53a9b3c2498e3868ade20380",
+        "name": "Viva la Pinta",
+        "location": { "lat": 50.062616, "lng": 19.939775 },
+        "icon": "Beer"
+    },
+    {
+        "id": "5831fe30fb549a1ff58ef339",
+        "name": "Taste of India",
+        "location": { "lat": 50.052676, "lng": 19.941944 },
+        "icon": "Dinner"
     }
 ]

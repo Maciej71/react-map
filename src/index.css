@@ -41,6 +41,15 @@ body {
 /*Places List Styling*/
 .places-grid {
   list-style-type: none;
+  /* display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: bisque; */
+}
+
+.list-row {
+  background-color: palegreen;
 }
 
 /*List row styling*/
@@ -50,14 +59,14 @@ body {
 
 @media screen and (min-width: 400px) {
 .outer-container {
-    grid-template-columns: 40% 60%;
+    grid-template-columns: 20% 80%;
 
   }
 }
 
 @media screen and (min-width: 800px) {
   .outer-container {
-      grid-template-columns: 25% 75%;
+      grid-template-columns: 15% 85%;
 
     }
   }

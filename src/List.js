@@ -55,6 +55,7 @@ export default class List extends Component {
 			<div>
 				<div className="filter">
 					<input
+					    aria-label='Enter search text'
 						className='search-places'
 						type='text'
 						placeholder='Search places'

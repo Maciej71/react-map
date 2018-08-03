@@ -16,6 +16,7 @@ export default class MapContainer extends Component {
 		const { places, selected, selectPlace, deselectPlace, foursquareVenues } = this.props
 		return (
 			<PlacesMap
+			  title="Google Maps"
 			  places={ places }
 			  selected={ selected }
 			  selectPlace={ selectPlace }
