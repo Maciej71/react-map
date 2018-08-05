@@ -30,6 +30,7 @@ export default class App extends Component {
       .then((response) => {
         if(!response.ok) {
           throw Error(response.statusText);
+          //error is communicating to user via returned rating value in catch 
         }
         return response
       }
@@ -40,7 +41,8 @@ export default class App extends Component {
       })
       .catch(err => {
         console.log(err)
-        return { "rating" : "?", "id" : place.id }
+        //directly in infoWindow user will see note about unavailability of rate
+        return { "rating" : "is not available at the moment", "id" : place.id }
         })
       )
     )

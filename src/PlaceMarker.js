@@ -31,7 +31,7 @@ export default class PlaceMarker extends Component {
         {selected &&
           <InfoWindow onCloseClick={this.toggleWindow}>
           <div className="ratig">
-            <div>Rate: {rating}</div>
+            <div>Rate {rating}</div>
           </div>
          </InfoWindow>
         }
