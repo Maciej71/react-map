@@ -9,8 +9,8 @@ export default class PlaceMarker extends Component {
   static propTypes = {
     selected: PropTypes.bool.isRequired,
     id: PropTypes.string.isRequired,
-    // selectPlace: PropTypes.function.isRequired,
-    // deselectPlace: PropTypes.function.isRequired
+    selectPlace: PropTypes.func.isRequired,
+    deselectPlace: PropTypes.func.isRequired
 	}
 
   toggleWindow = () => {
@@ -30,7 +30,9 @@ export default class PlaceMarker extends Component {
         >
         {selected &&
           <InfoWindow onCloseClick={this.toggleWindow}>
-            <h2>RATE: {rating}</h2>
+          <div className="ratig">
+            <div>Rate: {rating}</div>
+          </div>
          </InfoWindow>
         }
         </Marker>

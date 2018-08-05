@@ -34,39 +34,78 @@ body {
 .outer-container {
   display: grid;
   height: 100vh;
-  grid-template-rows: 30vh 1fr;
+  grid-template-rows: 35vh;
   background-color: #f7f7f7;
 }
 
 /*Places List Styling*/
 .places-grid {
   list-style-type: none;
-  /* display: flex;
+  display: flex;
   flex-direction: column;
+  align-items: stretch;
   justify-content: space-between;
-  align-items: center;
-  background-color: bisque; */
 }
 
-.list-row {
-  background-color: palegreen;
+.list {
+  grid-row-start: 1;
+  grid-row-end: 3;
+  min-width: 120px;
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.filter {
+  padding: 2vh 1vw;
+  min-width: 100px;
+}
+
+.search-places {
+  width: 99%;
 }
 
 /*List row styling*/
 .selected-row {
-  background-color: aquamarine;
+  background-color: #e5e5e5;
+}
+
+.list-row {
+  padding: 1vh;
+  margin: 0.5vh;
+}
+
+/*Rate styling*/
+.ratig {
+  font-size: 1.25em;
+  color: gray;
+  margin-top: 20%;
 }
 
 @media screen and (min-width: 400px) {
 .outer-container {
-    grid-template-columns: 20% 80%;
+    grid-template-columns: 35% 65%;
+  }
+}
 
+@media screen and (min-width: 600px) {
+  .outer-container {
+      grid-template-columns: 30% 70%;
   }
 }
 
 @media screen and (min-width: 800px) {
   .outer-container {
-      grid-template-columns: 15% 85%;
+      grid-template-columns: 25% 75%;
 
-    }
   }
+}
+
+@media screen and (min-width: 1000px) {
+  .outer-container {
+      grid-template-columns: 20% 80%;
+
+  }
+}
+

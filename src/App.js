@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-// import logo from './logo.svg';
 import './App.css'
 import MapContainer from './MapContainer'
 import List from './List'
@@ -22,31 +21,19 @@ export default class App extends Component {
     return response
   }
 
-  //handle lack of rating in case of api error
-  foursquareInaccessible = (placeId) => {
-    this.setState(prevState => ({
-      foursquare: [ ...prevState.foursquare, { "rating" : "?", "id" : placeId }]
-    }))
-    console.log(this.state.foursquare);
-  }
-
-  //handle data provided from API
-  foursquareAaccessible = (placeId, res) => {
-    const rating = res.response.venue.rating
-    this.setState(prevState => ({
-      foursquare: [ ...prevState.foursquare, { "rating" : rating, "id" : placeId }]
-    }))
-    // return res.resolved()
-    console.log(this.state.foursquare);
-  }
-
   //Fetch data for rating
   async componentDidMount() {
     await Promise.all(
       places.map(
-        async (place) => await (await (fetch('htps://api.foursquare.com/v2/venues/'+place.id+'?&oauth_token=1PN3BU2MQGDW5D0SPA5A5HQRAFZWZ5AJMYSYG3GPEL2DY254&v=20180803')
+        async (place) => await (await (fetch('https://api.foursquare.com/v2/venues/'+place.id+'?&client_id=EAKV0SHDQ3PR5RZNARHKXH32YTZ1OIFPC1Y3PAY3CTBVKO1V&client_secret=UXY4PPJH0B35AEREN5XE4KACPE5QUN4MM0B5AUMLQX1AABVK&v=20190722')
       )
-      .then(this.handleErrors)
+      .then((response) => {
+        if(!response.ok) {
+          throw Error(response.statusText);
+        }
+        return response
+      }
+    )
       .then(res => { return res.json() })
       .then(data => {
         return { "rating" : data.response.venue.rating, "id" : place.id }
@@ -55,7 +42,9 @@ export default class App extends Component {
         console.log(err)
         return { "rating" : "?", "id" : place.id }
         })
-    ))).then((data) => this.setState({ foursquare: data }))
+      )
+    )
+  ).then((data) => this.setState({ foursquare: data }))
   
     this.setState({displayedPlaces: places})
   }
@@ -97,9 +86,9 @@ export default class App extends Component {
             <MapContainer
               places={ displayedPlaces}
               selected={ selectedFromList }
+              foursquareVenues={ foursquare }
               selectPlace={ this.selectPlace }
               deselectPlace={ this.deselectPlace }
-              foursquareVenues={ foursquare }
             />
           </div>
         </div>

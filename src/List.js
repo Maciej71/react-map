@@ -13,8 +13,7 @@ export default class List extends Component {
 	}
 
 	state = {
-	query: '',
-	// isSelected: false
+	query: ''
 	}
 
 	/*
@@ -66,7 +65,7 @@ export default class List extends Component {
 						}}
 					/>
 				</div>
-			  <ul className="places-grid">
+			  <div className="places-grid" role="list">
 					{displayPlaces.map((place) => {
 						let active = selected.includes(place.id) ? true : false
 						return(
@@ -78,8 +77,8 @@ export default class List extends Component {
 							/>
 						)
 					})}
-			  </ul>
-      </div>
+			  </div>
+      		</div>
 		);
 	}
 }

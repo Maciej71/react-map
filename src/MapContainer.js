@@ -7,8 +7,8 @@ export default class MapContainer extends Component {
 	static propTypes = {
 		places: PropTypes.array.isRequired,
 		selected: PropTypes.array.isRequired,
-		// selectPlace: PropTypes.function.isRequired,
-		// deselectPlace: PropTypes.function.isRequired,
+		selectPlace: PropTypes.func.isRequired,
+		deselectPlace: PropTypes.func.isRequired,
 		foursquareVenues: PropTypes.array.isRequired
 	}
 
@@ -22,7 +22,7 @@ export default class MapContainer extends Component {
 			  selectPlace={ selectPlace }
         deselectPlace={ deselectPlace }
 				foursquare= { foursquareVenues }
-			  googleMapURL={`https://maps.googleapis.com/maps/api/js?key=AIzaSyA4pkKsxPzKzIsKZRqY0BKzhldvfVqxRU4&v=3.exp&libraries=geometry,drawing,places`}
+			  googleMapURL={ 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAQi-OSjGUi2LNB_6InQaFqDeFNELwlwv0&v=3.exp&libraries=geometry,drawing,places' }
 			  loadingElement={<div style={{ height: `100%` }} />}
 			  containerElement={<div style={{ height: `100vh`}} />}
 			  mapElement={<div style={{ height: `100%` }} />}
